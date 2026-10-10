@@ -1,0 +1,54 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/stampar-meni">← Nazad na meni</a>
+  </div>
+
+  <hr>
+
+  <h2>Narucene narudzbine</h2>
+
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID fakture</th>
+          <th>Klijent</th>
+          <th>Proizvodi</th>
+          <th>Ukupno</th>
+          <th>Status</th>
+          <th>Akcija</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (f of narudzbine; track f._id) {
+          <tr>
+            <td>{{f._id}}</td>
+            <td>{{f.kliKorIme}}</td>
+            <td>
+              @for (p of f.proizvodi; track p.naziv) {
+                {{p.naziv}} ({{p.kolicina}})<br>
+              }
+            </td>
+            <td>{{f.ukCena}} din</td>
+            <td>
+              <span class="status" [class.status-isporuceno]="f.status === 'isporuceno'">
+                {{f.status}}
+              </span>
+            </td>
+            <td>
+              @if (f.status == 'naruceno') {
+                <button (click)="promeniStatus(f._id)">Prebaci u "u stampi"</button>
+              }
+              @if (f.status == 'u stampi') {
+                <button (click)="promeniStatus(f._id)">Prebaci u "isporuceno"</button>
+              }
+              @if (f.status == 'isporuceno') {
+                <span>Nema</span>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

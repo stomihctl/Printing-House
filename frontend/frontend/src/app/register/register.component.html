@@ -1,0 +1,46 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/">← Nazad na meni</a>
+  </div>
+
+  <hr>
+
+  <h2>Registracija</h2>
+
+  <label>Uloga:</label>
+  <select [(ngModel)]="uloga" name="uloga">
+    <option value="klijent">Klijent</option>
+    <option value="stampar">Štamparija</option>
+  </select>
+  <br>
+
+  @if(uloga === 'klijent'){
+    <label>Tip:</label>
+    <select [(ngModel)]="tip" name="tip">
+      <option value="fizicko">Fizičko lice</option>
+      <option value="pravno">Pravno lice</option>
+    </select>
+    <br>
+  }
+
+  <label>Korisničko ime:</label> <input type="text" [(ngModel)]="kor_ime" name="kor_ime"> <br>
+  <label>Lozinka:</label> <input type="password" [(ngModel)]="lozinka" name="lozinka"> <br>
+  <label>Ime:</label> <input type="text" [(ngModel)]="ime" name="ime"> <br>
+  <label>Prezime:</label> <input type="text" [(ngModel)]="prezime" name="prezime"> <br>
+  <label>Telefon:</label> <input type="text" [(ngModel)]="telefon" name="telefon"> <br>
+  <label>Email:</label> <input type="email" [(ngModel)]="mejl" name="mejl"> <br>
+
+  @if(uloga === 'stampar' || (uloga === 'klijent' && tip === 'pravno')){
+    <div class="kartica">
+      <label>Naziv institucije:</label> <input type="text" [(ngModel)]="nazivInstitucije" name="nazivInstitucije"> <br>
+      <label>Adresa sedišta:</label> <input type="text" [(ngModel)]="adresaSedista" name="adresaSedista"> <br>
+      <label>Matični broj:</label> <input type="text" [(ngModel)]="maticniBroj" name="maticniBroj"> <br>
+      <label>PIB:</label> <input type="text" [(ngModel)]="pib" name="pib"> <br>
+    </div>
+  }
+
+  <label>Profilna slika:</label> <input type="file" (change)="obradiSlik($event)" accept="image/jpeg,image/png,image/gif"> <br><br>
+
+  <button (click)="register()">Registruj se</button>
+  <p class="poruka">{{message}}</p>
+</div>

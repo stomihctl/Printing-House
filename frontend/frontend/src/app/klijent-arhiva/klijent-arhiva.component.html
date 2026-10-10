@@ -1,0 +1,71 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/klijent-pocetna">← Nazad na meni</a>
+  </div>
+
+  <hr>
+
+  <h2>Arhiva proizvoda</h2>
+
+  @if (message) {
+    <p class="poruka">{{message}}</p>
+  }
+
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th (click)="sortiraj('datum')" style="cursor: pointer">Datum ⇅</th>
+          <th (click)="sortiraj('naziv')" style="cursor: pointer">Naziv ⇅</th>
+          <th (click)="sortiraj('kolicina')" style="cursor: pointer">Kolicina ⇅</th>
+          <th (click)="sortiraj('stamparKorIme')" style="cursor: pointer">Stamparija ⇅</th>
+          <th>Status</th>
+          <th>Akcija</th>
+          <th>Svidjanja</th>
+          <th>Komentar</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (st of stavke; track st.proId) {
+          <tr>
+            <td>{{st.datum | date:'short'}}</td>
+            <td>{{st.naziv}}</td>
+            <td>{{st.kolicina}}</td>
+            <td>{{st.stamparKorIme}}</td>
+            <td>
+              <span class="status" [class.status-isporuceno]="st.status === 'isporuceno'" [class.status-primljeno]="st.status === 'primljeno'">
+                {{st.status}}
+              </span>
+            </td>
+            <td>
+              @if (st.status == 'isporuceno') {
+                <button (click)="primi(st.fakturaId)">Oznaci kao primljeno</button>
+              }
+              @if (st.status == 'primljeno') {
+                <span>Nema</span>
+              }
+            </td>
+            <td>
+              @if (st.status == 'primljeno' && !st.lajkovano) {
+                <button (click)="svidi(st)">Svidja mi se</button>
+                <button (click)="nesvidi(st)">Ne svidja mi se</button>
+              }
+              @if (st.lajkovano) {
+                <span>Vec je ocenjeno</span>
+              }
+            </td>
+            <td>
+              @if (st.status == 'primljeno' && !st.komentarisano) {
+                <input type="text" [(ngModel)]="noviKomentar[st.proId]" placeholder="Komentar">
+                <button (click)="komentarisi(st)">Posalji</button>
+              }
+              @if (st.komentarisano) {
+                <span>Vec ste komentarisali</span>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

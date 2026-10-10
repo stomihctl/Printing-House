@@ -1,0 +1,38 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/klijent-pocetna">← Nazad na meni</a>
+  </div>
+
+  <hr>
+
+  <h2>Javne nabavke</h2>
+
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Datum raspisivanja</th>
+          <th>Proizvodi</th>
+          <th>Status</th>
+          <th>Pobednik</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (n of nabavke; track n._id) {
+          <tr>
+            <td>{{n._id}}</td>
+            <td>{{n.datumRaspisivanja}}</td>
+            <td>
+              @for (p of n.proizvodi; track p.naziv) {
+                {{p.naziv}} ({{p.kolicina}})<br>
+              }
+            </td>
+            <td><span class="status">{{n.status}}</span></td>
+            <td>{{n.pobednikStamparKorIme || '-'}}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

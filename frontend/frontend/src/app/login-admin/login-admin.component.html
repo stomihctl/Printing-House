@@ -1,0 +1,13 @@
+<div class="app-page">
+    <div class="kartica">
+    Korisnicko ime:: <input type="text" [(ngModel)]="username"> <br>
+    Lozinka: <input type="password" [(ngModel)]="password"> <br>
+    <br>
+    <button (click)="login()">Login</button>
+
+    </div>
+
+    @if(message) {
+    <p class="poruka">{{message}}</p>
+    }
+</div>

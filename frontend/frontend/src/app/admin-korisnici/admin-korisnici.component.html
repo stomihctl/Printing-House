@@ -1,0 +1,39 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/admin-meni">← Nazad na meni</a>
+  </div>
+
+  <hr>
+
+  <h2>Svi korisnici</h2>
+
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Korisnicko ime</th>
+          <th>Ime i prezime</th>
+          <th>Uloga</th>
+          <th>Status</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (k of korisnici; track k.kor_ime) {
+          <tr>
+            <td>{{k.kor_ime}}</td>
+            <td>{{k.ime}} {{k.prezime}}</td>
+            <td>{{k.uloga}}</td>
+            <td><span class="status">{{k.status}}</span></td>
+            <td>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <a [routerLink]="['/admin-korisnikEdit', k._id]">Izmeni</a>
+                <button class="opasno" (click)="obrisi(k._id!)">Obrisi</button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

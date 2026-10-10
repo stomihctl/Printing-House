@@ -1,0 +1,51 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/klijent-pocetna">← Nazad na meni</a>
+  </div>
+
+  <hr>
+
+  <h3>Pretraga proizvoda</h3>
+
+  <div class="kartica" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+    <div>
+      <label>Naziv:</label>
+      <input type="text" [(ngModel)]="naziv">
+    </div>
+
+    <div>
+      <label>Kategorija:</label>
+      <select [(ngModel)]="kat">
+        <option value="Sve kategorije">Sve kategorije</option>
+        @for (k of kategorije; track k) {
+          <option [value]="k">{{k}}</option>
+        }
+      </select>
+    </div>
+
+    <button (click)="nadji()">Pretraga</button>
+  </div>
+
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th (click)="sortiraj()" style="cursor: pointer">Naziv ⇅</th>
+          <th>Kategorija</th>
+          <th>Cena</th>
+          <th>Detalji</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of rezz; track p._id) {
+          <tr>
+            <td>{{p.naziv}}</td>
+            <td>{{p.kategorija}} / {{p.podkategorija}}</td>
+            <td>{{p.cena}} din</td>
+            <td><a [routerLink]="['/klijent-prodetalji', p._id]">Detalji</a></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

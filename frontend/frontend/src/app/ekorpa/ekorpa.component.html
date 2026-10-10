@@ -1,0 +1,62 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/klijent-pocetna">← Nazad na meni</a>
+  </div>
+
+  <hr>
+
+  <h2>E-korpa</h2>
+
+  @if (message) {
+    <div class="poruka">
+      <p style="margin: 0;">{{message}}</p>
+    </div>
+  }
+
+  @if (korpa.length == 0) {
+    <div class="poruka">
+      <p style="margin: 0;">Korpa je prazna</p>
+    </div>
+  }
+
+  @for (stamparKorIme of stamparije; track stamparKorIme) {
+    <div class="kartica">
+      <h3>Stamparija: {{stamparKorIme}}</h3>
+
+      <div class="tabela-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Slika</th>
+              <th>Naziv</th>
+              <th>Kolicina</th>
+              <th>Tip stampe</th>
+              <th>Cena</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (st of stavke(stamparKorIme); track $index) {
+              <tr>
+                <td><img class="slika-mala" [src]="st.slika"></td>
+                <td>{{st.naziv}}</td>
+                <td>{{st.kolicina}}</td>
+                <td>{{st.tipStampe}}</td>
+                <td>{{st.cena}} din</td>
+                <td><button (click)="ukloni(korpa.indexOf(st))">Ukloni</button></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top: 8px;"><strong>Ukupno za ovu stampariju:</strong> {{ukupnoZaStampariju(stamparKorIme)}} din</p>
+    </div>
+  }
+
+  @if (korpa.length > 0) {
+    <div style="margin-top: 14px;">
+      <button (click)="potvrdi()">Potvrdi</button>
+    </div>
+  }
+</div>

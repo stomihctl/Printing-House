@@ -1,0 +1,99 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/admin-korisnici">← Nazad na korisnike</a>
+  </div>
+
+  <hr>
+
+  <h2>Izmena korisnika</h2>
+
+  <div class="kartica">
+    <img class="slika-profil" [src]="slika.startsWith('data:') ? slika : 'assets/default_profile_image.jpg'"><br><br>
+
+    <div style="margin-bottom: 8px;">
+      <label>Promeni profilnu sliku:</label>
+      <input type="file" (change)="obradiSlik($event)" accept="image/jpeg,image/png,image/gif">
+    </div>
+
+    <div style="margin-bottom: 4px;">
+      <label>Korisnicko ime:</label>
+      <input type="text" [(ngModel)]="kor_ime">
+    </div>
+
+    <div style="margin-bottom: 4px;">
+      <label>Uloga:</label>
+      <select [(ngModel)]="uloga">
+        <option value="klijent">Klijent</option>
+        <option value="stampar">Stamparija</option>
+      </select>
+    </div>
+
+    @if (uloga === 'klijent') {
+      <div style="margin-bottom: 4px;">
+        <label>Tip:</label>
+        <select [(ngModel)]="tip">
+          <option value="fizicko">Fizicko lice</option>
+          <option value="pravno">Pravno lice</option>
+        </select>
+      </div>
+    }
+
+    <div style="margin-bottom: 4px;">
+      <label>Ime:</label>
+      <input type="text" [(ngModel)]="ime">
+    </div>
+
+    <div style="margin-bottom: 4px;">
+      <label>Prezime:</label>
+      <input type="text" [(ngModel)]="prezime">
+    </div>
+
+    <div style="margin-bottom: 4px;">
+      <label>Telefon:</label>
+      <input type="text" [(ngModel)]="telefon">
+    </div>
+
+    <div style="margin-bottom: 4px;">
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="mejl">
+    </div>
+
+    @if (uloga === 'stampar' || (uloga === 'klijent' && tip === 'pravno')) {
+      <div style="margin-bottom: 4px;">
+        <label>Naziv institucije:</label>
+        <input type="text" [(ngModel)]="nazivInstitucije">
+      </div>
+
+      <div style="margin-bottom: 4px;">
+        <label>Adresa sedista:</label>
+        <input type="text" [(ngModel)]="adresaSedista">
+      </div>
+
+      <div style="margin-bottom: 4px;">
+        <label>Maticni broj:</label>
+        <input type="text" [(ngModel)]="maticniBroj">
+      </div>
+
+      <div style="margin-bottom: 4px;">
+        <label>PIB:</label>
+        <input type="text" [(ngModel)]="pib">
+      </div>
+    }
+
+    <div style="margin-bottom: 8px;">
+      <label>Status:</label>
+      <select [(ngModel)]="status">
+        <option value="aktivan">Aktivan</option>
+        <option value="neaktivan">Neaktivan</option>
+        <option value="odbijen">Odbijen</option>
+      </select>
+    </div>
+
+    <br>
+    <button (click)="izmeni()">Sacuvaj izmene</button>
+  </div>
+
+  @if (message) {
+    <p class="poruka">{{message}}</p>
+  }
+</div>

@@ -1,0 +1,19 @@
+<div class="app-page">
+  <h2>Klijent pocetna</h2>
+
+  <div class="meni">
+    <a routerLink="/klijent-mojprofil">Profil</a>
+    <a routerLink="/klijent-pretrazi">Pretraga proizvoda</a>
+    <a routerLink="/klijent-ekorpa">E-korpa</a>
+    <a routerLink="/klijent-arhiva">Arhiva proizvoda</a>
+    @if (tip === 'pravno') {
+      <a routerLink="/klijent-nabavke">Javne nabavke</a>
+    }
+  </div>
+
+  <div class="kartica" style="margin-top: 20px;">
+    <p>Dobrodosli na klijentski panel. Izaberite opciju iz menija iznad ili se odjavite sa sistema.</p>
+    <hr>
+    <button class="opasno" (click)="izloguj()">Izloguj se</button>
+  </div>
+</div>

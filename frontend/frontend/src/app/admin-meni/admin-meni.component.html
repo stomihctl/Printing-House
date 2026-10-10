@@ -1,0 +1,15 @@
+<div class="app-page">
+  <h2>Admin meni</h2>
+
+  <div class="meni">
+    <a routerLink="/admin-korisnici">Korisnici</a>
+    <a routerLink="/admin-zahtevi">Zahtevi za registraciju</a>
+    <a routerLink="/admin-kategorije">Kategorije</a>
+  </div>
+
+  <div class="kartica" style="margin-top: 20px;">
+    <p>Dobrodosli na administratorski panel. Izaberite opciju iz menija iznad ili se odjavite sa sistema.</p>
+    <hr>
+    <button class="opasno" (click)="izloguj()">Izloguj se</button>
+  </div>
+</div>

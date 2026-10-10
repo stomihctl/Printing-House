@@ -1,0 +1,105 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/stampar-meni">← Nazad na meni</a>
+  </div>
+
+  <hr>
+
+  <h2>Dodaj proizvod</h2>
+
+  <div class="kartica">
+    <div style="margin-bottom: 4px;">
+      <label>Naziv:</label>
+      <input type="text" [(ngModel)]="naziv">
+    </div>
+
+    <div style="margin-bottom: 4px;">
+      <label>Cena:</label>
+      <input type="number" [(ngModel)]="cena">
+    </div>
+
+    <div style="margin-bottom: 4px;">
+      <label style="display: block; margin-bottom: 4px;">Opis:</label>
+      <textarea [(ngModel)]="opis" rows="3" style="width: 100%; max-width: 400px;"></textarea>
+    </div>
+
+    <div style="margin-bottom: 4px;">
+      <label>Slika:</label>
+      <input type="file" (change)="onFileSelected($event)" accept="image/jpeg,image/png,image/gif">
+    </div>
+
+    <div style="margin-bottom: 4px;">
+      <label>Kolicina:</label>
+      <input type="number" [(ngModel)]="kol">
+    </div>
+
+    <div style="margin-bottom: 4px;">
+      <label>Kategorija:</label>
+      <select [(ngModel)]="kat">
+        @for (k of kategorije; track k.naziv) {
+          <option [value]="k.naziv">{{k.naziv}}</option>
+        }
+      </select>
+    </div>
+
+    <div style="margin-bottom: 8px;">
+      <label>Podkategorija:</label>
+      <select [(ngModel)]="podkat">
+        @for (pk of trenKat()?.podkat; track pk) {
+          <option [value]="pk">{{pk}}</option>
+        }
+      </select>
+    </div>
+
+    <div style="margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+      <label>Boja:</label>
+      <input type="color" [(ngModel)]="boja">
+      <button (click)="dodajBoju()">Dodaj boju</button>
+    </div>
+
+    <div class="boje" style="margin-bottom: 12px;">
+      @for (b of boje; track b) {
+        <span class="boja" [style.background-color]="b" style="display: inline-block;"></span>
+      }
+    </div>
+
+    <hr>
+
+    <h3>Usluge stampe</h3>
+
+    <div style="margin-bottom: 4px;">
+      <label>Tip stampe:</label>
+      <input type="text" [(ngModel)]="tipStamp">
+    </div>
+
+    <div style="margin-bottom: 4px;">
+      <label>Max sirina:</label>
+      <input type="number" [(ngModel)]="maxS">
+    </div>
+
+    <div style="margin-bottom: 4px;">
+      <label>Max visina:</label>
+      <input type="number" [(ngModel)]="maxV">
+    </div>
+
+    <div style="margin-bottom: 8px;">
+      <label>Cena po komadu:</label>
+      <input type="number" [(ngModel)]="dodatnaCena">
+    </div>
+
+    <button (click)="dodajUslugu()">Dodaj uslugu</button>
+
+    <div style="margin-top: 10px;">
+      @for (u of uslugeStampe; track u.tipStampe) {
+        <p class="poruka" style="margin: 4px 0;">{{u.tipStampe}} - {{u.dodatnaCena}} din, max {{u.maxSirina}}x{{u.maxVisina}}mm</p>
+      }
+    </div>
+
+    <br>
+    <button (click)="dodajProizvod()">Sacuvaj proizvod</button>
+  </div>
+
+  @if (message) {
+    <p class="poruka">{{message}}</p>
+  }
+</div>

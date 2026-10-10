@@ -1,0 +1,43 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/stampar-meni">← Nazad na meni</a>
+  </div>
+
+  <hr>
+
+  <h2>Moji proizvodi</h2>
+
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Naziv</th>
+          <th>Kategorija</th>
+          <th>Cena</th>
+          <th>Kolicina</th>
+          <th>Izmeni kolicinu</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of proizvodi; track p._id) {
+          <tr>
+            <td>{{p.naziv}}</td>
+            <td>{{p.kategorija}} / {{p.podkategorija}}</td>
+            <td>{{p.cena}} din</td>
+            <td>{{p.kolicinaNaLageru}}</td>
+            <td>
+              <div style="display: flex; gap: 4px; align-items: center;">
+                <input type="number" [(ngModel)]="p.kolicinaNaLageru" style="width: 60px">
+                <button (click)="azurirajKolicinu(p._id, p.kolicinaNaLageru)">Sacuvaj</button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (message) {
+    <p class="poruka">{{message}}</p>
+  }
+</div>

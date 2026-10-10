@@ -1,0 +1,41 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a [routerLink]="['/klijent-prodetalji', proizvod._id]">Nazad</a>
+  </div>
+
+  <hr>
+
+  <h2>Priprema proizvoda: {{proizvod.naziv}}</h2>
+
+  <div class="kartica">
+    <img [src]="proizvod.slika" width="100"><br><br>
+
+    <strong>Vrsta stampe:</strong>
+    <div style="margin-top: 6px;">
+      @for (p of proizvod.uslugeStampe; track p.tipStampe) {
+        <label style="display: block; margin-bottom: 4px;">
+          <input type="radio" name="tipStampe" [value]="p.tipStampe" [(ngModel)]="tipS" (change)="izaberi(p.tipStampe, p.dodatnaCena)">
+          {{p.tipStampe}} +{{p.dodatnaCena}}
+        </label>
+      }
+    </div>
+    <br>
+
+    <label>Kolicina:</label>
+    <input type="number" min="1" [(ngModel)]="kolicina"><br><br>
+
+    <p><strong>Ukupna cena:</strong> {{(proizvod.cena + dodatnaCena) * kolicina}} din</p>
+
+    <label style="display: block; margin-bottom: 4px;">Tekst za stampu:</label>
+    <textarea [(ngModel)]="tekst" rows="4" style="width: 100%; max-width: 400px;"></textarea><br><br>
+
+    <div style="display: flex; gap: 8px;">
+      <button (click)="ponisti()">Ponisti</button>
+      <button (click)="dodaj()">Dodaj u korpu</button>
+    </div>
+  </div>
+
+  @if (message) {
+    <p class="poruka">{{message}}</p>
+  }
+</div>

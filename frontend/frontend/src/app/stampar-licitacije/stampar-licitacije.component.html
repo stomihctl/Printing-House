@@ -1,0 +1,31 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/stampar-meni">← Nazad na meni</a>
+  </div>
+
+  <hr>
+
+  <h2>Otvorene javne nabavke</h2>
+
+  @if (message) {
+    <p class="poruka">{{message}}</p>
+  }
+
+  @for (n of nabavke; track n._id) {
+    <div class="kartica">
+      <p><strong>ID:</strong> {{n._id}}</p>
+      <p><strong>Rok isteka:</strong> {{n.rokIsteka}}</p>
+      <hr>
+
+      @for (p of n.proizvodi; track p.naziv) {
+        <div style="margin-bottom: 6px;">
+          <label>{{p.naziv}} (kolicina: {{p.kolicina}}) - Cena po komadu:</label>
+          <input type="number" [(ngModel)]="cene[n._id][p.naziv]">
+        </div>
+      }
+
+      <br>
+      <button (click)="posaljiPonudu(n)">Posalji ponudu</button>
+    </div>
+  }
+</div>

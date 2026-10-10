@@ -1,0 +1,90 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/klijent-pocetna">← Nazad na meni</a>
+  </div>
+
+  <hr>
+
+  <h2>{{ pro.naziv }}</h2>
+
+  <div class="kartica">
+    <img 
+      [src]="pro.slika.startsWith('data:') ? pro.slika : 'assets/default_profile_image.jpg'" 
+      style="max-width: 150px; display: block; margin-bottom: 12px;"
+      alt="Proizvod">
+
+    <p><strong>Štamparija:</strong> {{ pro.stamparKorIme }}</p>
+    <p><strong>Adresa:</strong> {{ stamp.adresaSedista }}</p>
+    <p><strong>Cena:</strong> {{ pro.cena }} din</p>
+
+    <div style="margin: 10px 0;">
+      <label><strong>Izaberi boju:</strong></label>
+      <div class="boje">
+        @if (pro.boje.length === 0) {
+          <button
+            type="button"
+            class="boja"
+            style="background-color: #ffffff"
+            [class.izabrana]="boja === '#ffffff'"
+            (click)="boja = '#ffffff'">
+          </button>
+        }
+        @for (b of pro.boje; track b) {
+          <button
+            type="button"
+            class="boja"
+            [style.background-color]="b"
+            [class.izabrana]="boja === b"
+            (click)="boja = b">
+          </button>
+        }
+      </div>
+    </div>
+
+    <p><strong>Opis:</strong> {{ pro.opis }}</p>
+  </div>
+
+  <h3>Vrste štampe</h3>
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Tip stampe</th>
+          <th>Dodatna cena</th>
+          <th>Max sirina</th>
+          <th>Max visina</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (u of pro.uslugeStampe; track u.tipStampe) {
+          <tr>
+            <td>{{ u.tipStampe }}</td>
+            <td>{{ u.dodatnaCena }} din</td>
+            <td>{{ u.maxSirina }} mm</td>
+            <td>{{ u.maxVisina }} mm</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin: 14px 0;">
+    <button (click)="idi()">Idi dalje</button>
+  </div>
+
+  <div style="margin-bottom: 14px;">
+    <span class="status status-isporuceno">Broj svidjanja: {{ pro.brojSvidjanja }}</span>
+    <span class="status status-otkazano">Broj nesvidjanja: {{ pro.brojNesvidjanja }}</span>
+  </div>
+
+  <h3>Komentari</h3>
+  <div class="kartica">
+    @for (k of poslednjiKomentari(); track k.datum) {
+      <div [class.moj-komentar]="k.korIme === korIme" [class.tudji-komentar]="k.korIme !== korIme">
+        <strong>{{ k.korIme }}</strong> 
+        <small style="color: #555;">({{ k.datum | date:'short' }})</small>
+        <p style="margin-top: 4px; margin-bottom: 0;">{{ k.tekst }}</p>
+      </div>
+    }
+  </div>
+</div>

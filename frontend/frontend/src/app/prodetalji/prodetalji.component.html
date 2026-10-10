@@ -1,0 +1,12 @@
+<div class="app-page">
+  <a routerLink="/">← Nazad na pocetnu</a>
+  <hr>
+  <h2>{{proizvod.naziv}}</h2>
+
+  <img [src]="proizvod.slika.startsWith('data:') ? proizvod.slika : 'assets/default_profile_image.jpg'" width="200"><br><br>
+
+  <p><strong>Stamparija:</strong> {{proizvod.stamparKorIme}}</p>
+  <p><strong>Grad:</strong> {{stampar.adresaSedista}}</p>
+  <p><strong>Broj svidjanja:</strong> {{proizvod.brojSvidjanja}}</p>
+  <p><strong>Broj nesvidjanja:</strong> {{proizvod.brojNesvidjanja}}</p>
+</div>

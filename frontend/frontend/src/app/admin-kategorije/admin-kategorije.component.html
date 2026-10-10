@@ -1,0 +1,39 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/admin-meni">← Nazad na meni</a>
+  </div>
+
+  <hr>
+
+  <h2>Kategorije proizvoda</h2>
+
+  <div class="kartica" style="margin-bottom: 16px;">
+    <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+      <label>Nova kategorija:</label>
+      <input type="text" [(ngModel)]="noviNazivKat">
+      <button (click)="dodajKat()">Dodaj kategoriju</button>
+    </div>
+  </div>
+
+  @if (message) {
+    <p class="poruka">{{message}}</p>
+  }
+
+  @for (k of kategorije; track k.naziv) {
+    <div class="kartica">
+      <strong>{{k.naziv}}</strong>
+
+      <ul>
+        @for (pk of k.podkat; track pk) {
+          <li>{{pk}}</li>
+        }
+      </ul>
+
+      <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 10px;">
+        <label>Nova potkategorija:</label>
+        <input type="text" [(ngModel)]="novaPodkat[k.naziv]">
+        <button (click)="dodajPodkat(k.naziv)">Dodaj potkategoriju</button>
+      </div>
+    </div>
+  }
+</div>

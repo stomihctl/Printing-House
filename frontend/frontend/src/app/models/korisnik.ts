@@ -1,0 +1,17 @@
+export class Korisnik {
+    _id = ""
+    kor_ime = ""
+    lozinka = ""
+    uloga = ""
+    tip = ""
+    ime = ""
+    prezime = ""
+    telefon = ""
+    mejl = ""
+    profilnaSlika = ""
+    nazivInstitucije = ""
+    adresaSedista = ""
+    maticniBroj = ""
+    pib = ""
+    status = ""
+}

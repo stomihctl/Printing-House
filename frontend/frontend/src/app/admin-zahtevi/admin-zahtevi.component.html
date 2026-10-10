@@ -1,0 +1,39 @@
+<div class="app-page">
+  <div style="margin-bottom: 10px;">
+    <a routerLink="/admin-meni">← Nazad na meni</a>
+  </div>
+
+  <hr>
+
+  <h2>Zahtevi za registraciju</h2>
+
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Korisnicko ime</th>
+          <th>Ime i prezime</th>
+          <th>Uloga</th>
+          <th>Email</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (z of zahtevi; track z._id) {
+          <tr>
+            <td>{{z.kor_ime}}</td>
+            <td>{{z.ime}} {{z.prezime}}</td>
+            <td>{{z.uloga}}</td>
+            <td>{{z.mejl}}</td>
+            <td>
+              <div style="display: flex; gap: 6px;">
+                <button (click)="odobri(z._id!)">Prihvati</button>
+                <button class="opasno" (click)="odbij(z._id!)">Odbij</button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
